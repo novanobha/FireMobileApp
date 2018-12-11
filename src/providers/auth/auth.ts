@@ -17,7 +17,7 @@ export class AuthProvider {
     console.log('Hello AuthProvider Provider');
   }
   async login(cred: any) {
-    return new Promise(function (resolve, reject) {
+    return new Promise((resolve, reject) => {
       let headers = new HttpHeaders();
       headers.append("Content-Type", "application/x-www-form-urlencoded");
       debugger
