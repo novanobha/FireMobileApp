@@ -1,39 +1,32 @@
-import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
+import { Component, ViewChild } from "@angular/core";
+import { Nav, Platform } from "ionic-angular";
+import { StatusBar } from "@ionic-native/status-bar";
+import { SplashScreen } from "@ionic-native/splash-screen";
 
-import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
-import { MapPage } from '../pages/map/map';
+import { HomePage } from "../pages/home/home";
+import { ListPage } from "../pages/list/list";
+import { MapPage } from "../pages/map/map";
 
-import { LoginPage } from '../pages/login/login';
-import { FiretrucksPage} from '../pages/firetrucks/firetrucks';
-import {AlertsPage} from '../pages/alerts/alerts';
+import { LoginPage } from "../pages/login/login";
+import { FiretrucksPage } from "../pages/firetrucks/firetrucks";
+import { AlertsPage } from "../pages/alerts/alerts";
 //import{ AuthService} from '../providers/auth'
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: "app.html"
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any;
 
-  pages: Array<{ title: string, component: any }>;
+  pages: Array<{ title: string; component: any }>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(
+    public platform: Platform,
+    public statusBar: StatusBar,
+    public splashScreen: SplashScreen
+  ) {
     this.initializeApp();
-    this.rootPage = LoginPage;
-    // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage },
-      { title: 'City Map', component: MapPage },
-      { title: 'Alerts', component: AlertsPage },
-      { title: 'Firetrucks', component: FiretrucksPage }
-      
-    ];
-
   }
 
   initializeApp() {
@@ -42,6 +35,15 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.rootPage = LoginPage;
+      // used for an example of ngFor and navigation
+      this.pages = [
+        { title: "Home", component: HomePage },
+        { title: "List", component: ListPage },
+        { title: "City Map", component: MapPage },
+        { title: "Alerts", component: AlertsPage },
+        { title: "Firetrucks", component: FiretrucksPage }
+      ];
     });
   }
 
