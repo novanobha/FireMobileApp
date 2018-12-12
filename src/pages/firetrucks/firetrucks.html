@@ -5,14 +5,30 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
+    <button ion-button menuToggle><ion-icon name="menu"></ion-icon></button>
     <ion-title>Firetrucks</ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content padding>
-
+  <ion-card *ngFor="let x of firetrucks">
+    <ion-card-header>{{ x.name }}</ion-card-header>
+    <ion-card-content *ngFor="let y of x.firemen">
+      <ion-grid>
+        <ion-row>
+          <ion-col> Name: </ion-col>
+          <ion-col> {{ y.name }} </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col> Age: </ion-col>
+          <ion-col> {{ y.age }} </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col> Heartrate: </ion-col>
+          <ion-col> {{ y.heartrate }} </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

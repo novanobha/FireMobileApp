@@ -40,6 +40,7 @@ import { UtilalertProvider } from "../providers/utilalert/utilalert";
     ListPage,
     HydrantModalPage,
     FiretruckmodalPage,
+    FiretrucksPage,
     MapPage,
     AlertsPage
   ],
@@ -57,6 +58,7 @@ import { UtilalertProvider } from "../providers/utilalert/utilalert";
     ListPage,
     HydrantModalPage,
     FiretruckmodalPage,
+    FiretrucksPage,
     MapPage,
     AlertsPage
   ],
