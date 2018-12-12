@@ -1,5 +1,10 @@
 import { Component } from "@angular/core";
-import { IonicPage, NavController, NavParams } from "ionic-angular";
+import {
+  IonicPage,
+  NavController,
+  NavParams,
+  ModalController
+} from "ionic-angular";
 
 import { UtilalertProvider } from "../../providers/utilalert/utilalert";
 
@@ -12,6 +17,9 @@ import {
   GoogleMapsAnimation,
   MyLocation
 } from "@ionic-native/google-maps";
+
+import { HydrantModalPage } from "../../modals/hydrant-modal/hydrant-modal";
+import { FiretruckmodalPage } from "../../modals/firetruckmodal/firetruckmodal";
 
 import { HydrantProvider } from "../../providers/hydrant/hydrant";
 
@@ -35,7 +43,8 @@ export class MapPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private util: UtilalertProvider,
-    private hydrant: HydrantProvider
+    private hydrant: HydrantProvider,
+    private modal: ModalController
   ) {}
 
   ionViewDidLoad() {
@@ -76,9 +85,11 @@ export class MapPage {
   async addMarkers() {
     if (this.mapReady) {
       this.map.clear();
+
       try {
         let hydrants: any = await this.hydrant.getAllHydrant();
         let trucks: any = await this.hydrant.getAllTrucks();
+        debugger;
         let hydrantIcon: MarkerIcon = {
           url: "assets/icon/fire-hydrant.png",
           size: {
@@ -106,6 +117,17 @@ export class MapPage {
             .then(
               marker => {
                 console.log(marker);
+                marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(data => {
+                  console.log(element);
+                  this.modal
+                    .create(HydrantModalPage, {
+                      temperature: element.temperature,
+                      name: element.name,
+                      pressure: element.pressure,
+                      condition: element.condition
+                    })
+                    .present();
+                });
               },
               err => {
                 console.log(err);
@@ -126,7 +148,15 @@ export class MapPage {
             .then(
               marker => {
                 console.log(marker);
-                marker.on("");
+                marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(data => {
+                  console.log(element);
+                  this.modal
+                    .create(FiretruckmodalPage, {
+                      name: element.name,
+                      firemen: element.firemen
+                    })
+                    .present();
+                });
               },
               err => {
                 console.log(err);

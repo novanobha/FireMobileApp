@@ -34,7 +34,7 @@ export class LoginPage {
       let data: any = await this.auth.login(this.cred);
       this.util.dismissLoader();
       if (data) {
-        this.navCtrl.push(HomePage);
+        this.navCtrl.setRoot(HomePage);
       } else {
         this.util.showAlertBasic("Error", `${data}! Try Again!`);
       }

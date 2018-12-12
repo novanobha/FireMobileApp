@@ -10,7 +10,7 @@ import { Storage } from "@ionic/storage";
 */
 @Injectable()
 export class HydrantProvider {
-  ip: String = `http://10.30.144.102:8080`;
+  ip: String = `http://192.168.1.220:8080`;
   url: String = `${this.ip}/api`;
   constructor(public http: HttpClient, private storage: Storage) {
     console.log("Hello HydrantProvider Provider");

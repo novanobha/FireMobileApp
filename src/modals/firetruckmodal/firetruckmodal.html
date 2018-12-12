@@ -1,0 +1,37 @@
+<!--
+  Generated template for the FiretruckmodalPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">Close</button>
+    </ion-buttons>
+
+    <ion-title>firetruckmodal</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-header>{{ name }}</ion-card-header>
+    <ion-card-content *ngFor="let x of firemen">
+      <ion-grid>
+        <ion-row>
+          <ion-col> Name: </ion-col>
+          <ion-col> {{ x.name }} </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col> Age: </ion-col>
+          <ion-col> {{ x.age }} </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col> Heartrate: </ion-col>
+          <ion-col> {{ x.heartrate }} </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
