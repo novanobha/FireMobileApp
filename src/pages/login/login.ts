@@ -28,12 +28,16 @@ export class LoginPage {
     console.log("ionViewDidLoad LoginPage");
   }
 
+  /**
+   * Function called when user submits credentials
+   */
   async login() {
     this.util.showLoader("Logging In");
     try {
       let data: any = await this.auth.login(this.cred);
       this.util.dismissLoader();
       if (data) {
+        //If user is logged in successfully, set homepage as root page
         this.navCtrl.setRoot(HomePage);
       } else {
         this.util.showAlertBasic("Error", `${data}! Try Again!`);

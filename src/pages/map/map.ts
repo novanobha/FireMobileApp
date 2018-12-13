@@ -52,6 +52,9 @@ export class MapPage {
     this.loadMap();
   }
 
+  /**
+   * Function to generate the map
+   */
   async loadMap() {
     this.map = GoogleMaps.create("map_canvas", {
       preferences: {
@@ -71,8 +74,10 @@ export class MapPage {
     });
 
     try {
+      //Wait for map to be ready
       await this.map.one(GoogleMapsEvent.MAP_READY);
       this.mapReady = true;
+      //Add markers for firetrucks and hydrants once map is ready
       this.addMarkers();
     } catch (err) {
       console.log(err);
@@ -82,14 +87,21 @@ export class MapPage {
       );
     }
   }
+
+  /**
+   * Function to load markers on the map
+   */
   async addMarkers() {
     if (this.mapReady) {
+      //Clear all previous map markers
       this.map.clear();
 
       try {
+        //Request hydrant and truck information
         let hydrants: any = await this.hydrant.getAllHydrant();
         let trucks: any = await this.hydrant.getAllTrucks();
-        debugger;
+
+        //Set icon configuration for marker
         let hydrantIcon: MarkerIcon = {
           url: "assets/icon/fire-hydrant.png",
           size: {
@@ -104,6 +116,8 @@ export class MapPage {
             height: 32
           }
         };
+
+        //Add markers for each hydrant
         hydrants.forEach(element => {
           this.map
             .addMarker({
@@ -117,6 +131,7 @@ export class MapPage {
             .then(
               marker => {
                 console.log(marker);
+                //Add on click listener for marker which opens a modal with details about the hydrant
                 marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(data => {
                   console.log(element);
                   this.modal
@@ -135,6 +150,7 @@ export class MapPage {
             );
         });
 
+        //Add markers for each firetruck
         trucks.forEach(element => {
           this.map
             .addMarker({
@@ -148,6 +164,7 @@ export class MapPage {
             .then(
               marker => {
                 console.log(marker);
+                //Add on click listener for marker which opens a modal with details about the firetruck
                 marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(data => {
                   console.log(element);
                   this.modal
