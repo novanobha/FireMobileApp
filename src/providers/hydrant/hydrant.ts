@@ -27,12 +27,24 @@ export class HydrantProvider {
       }
     });
   }
+
+  /**
+   * getAllHydrant method: Sends an HTTP GET request to server requesting the last recorded status of the hydrant along with the location of the hydrant
+   * The server responds with an array of JSON objects where each object contains the location of the hydrant, the sensor values and status (normal/faulty)
+   */
   getAllHydrant() {
     return new Promise(async (resolve, reject) => {
       let headers = new HttpHeaders();
       try {
+        //Retrieve authentication token from storage
         let token = await this.getAuthToken();
+
+        //Append authentication header to request 
         headers = headers.append("Authorization", `Bearer ${token}`);
+        
+        //Send an HTTP GET request to the server
+        //The function returns an observable which is resolved with data on success 
+        //The observable is rejected with err if there was an error from the server
         this.http
           .get(`${this.url}/listAllHydrant`, { headers: headers })
           .subscribe(
@@ -50,12 +62,23 @@ export class HydrantProvider {
     });
   }
 
+  /**
+   * getAllTrucls method: Sends an HTTP GET request to server requesting information of all the firetrucks
+   * The server responds with an array of JSON objects where each object represents a firetruck and contains the location of the truck and the list of firemen in the truck
+   */
   getAllTrucks() {
     return new Promise(async (resolve, reject) => {
       let headers = new HttpHeaders();
       try {
+        //Retrieve authentication token from local storage
         let token = await this.getAuthToken();
+
+        //Append authentication header to request 
         headers = headers.append("Authorization", `Bearer ${token}`);
+
+        //Send an HTTP GET request to the server
+        //The function returns an observable which is resolved with data on success 
+        //The observable is rejected with err if there was an error from the server
         this.http
           .get(`${this.url}/listAllTrucks`, { headers: headers })
           .subscribe(
